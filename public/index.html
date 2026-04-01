@@ -103,8 +103,9 @@
         }
       }
 
-      if (!navigator.serviceWorker.controller) {
-        alert("Service worker is still loading. Please wait a few seconds and try again.");
+      if (!window.__proxyReady) {
+        // Wait for the proxy to be ready, then navigate
+        window.addEventListener("proxyready", () => navigateTo(url), { once: true });
         return;
       }
 
